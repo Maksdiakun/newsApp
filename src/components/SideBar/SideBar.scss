@@ -1,0 +1,19 @@
+.side_bar{
+    width: 300px;
+    flex-shrink: 0;
+}
+.side_bar{
+    padding-top: 40px;
+    h4{
+        text-align: center;
+        margin-bottom: 43px;
+    }
+    li{
+        display: block;
+        width: 100%;
+        margin-bottom: 30px;
+        a{
+            color: #005c99;
+        }
+    }
+}

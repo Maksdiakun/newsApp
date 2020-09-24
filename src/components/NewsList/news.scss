@@ -1,0 +1,25 @@
+.news_full{
+    max-width: 100%;
+    padding:30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &_img{
+        position: relative;
+        overflow: hidden;
+        max-width: 500px;
+        max-height: 500px;
+        img{
+            object-position: center center;
+            object-fit: cover;
+            width: 100%;
+            height: auto;
+        }
+    }
+    p{
+        margin-bottom: 10px;
+    }
+}
+.news_item{
+    overflow: hidden;
+}
