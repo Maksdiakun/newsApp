@@ -4,3 +4,7 @@ export const SEARCH_NEWS = "SEARCH_NEWS";
 export const CHANGE_STATUS = "CHANGE_STATUS";
 export const GET_NEWS = "GET_NEWS";
 export const LOAD = "LOAD";
+export const CHANGE_SOURCE = "CHANGE_SOURCE";
+export const LOAD_ALL_LIKED_POSTS = "LOAD_ALL_LIKED_POSTS";
+export const REMOVE_LIKED_POSTS = "REMOVE_LIKED_POSTS";
+export const ADD_LIKED_POSTS = "ADD_LIKED_POSTS";
