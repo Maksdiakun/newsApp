@@ -46,3 +46,45 @@ input{
     display: flex;
     flex-wrap: wrap;
 }
+textarea{
+    resize: none;
+    display: block;
+    
+}
+.add_comment{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    textarea{
+        margin-top: 20px;
+    }
+}
+.comments{
+    li{
+        width: 100%;
+        max-width: 350px;
+        margin: 0 auto;
+        border: 1px solid #333;
+        padding: 10px;
+        border-radius: 10px;
+        list-style: none;
+        margin-bottom: 10px;
+        font-size: 12px;
+        >div{
+            >div{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2px;
+            font-size: 12px;
+            }
+            >p{
+                color: grey;
+                font-size: 8px;
+            }
+        }
+        >p{
+            margin-top: 20px;
+        }
+    }
+}

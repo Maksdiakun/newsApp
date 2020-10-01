@@ -18,11 +18,12 @@ const NewsList = () => {
   if (loading) {
     return <Spiner />;
   }
-  return news ? (
+  return news && news.length > 0 ? (
     <>
       <div className="news_list">
-        {news.map((el, index) => (
-          <Link to={`/news/` + index} key={v4()} className="news_item">
+        {news.map((el) => (
+          <Link to={`/news/${el.title}`} key={v4()} className="news_item">
+            {/* encodeURIComponent(el.title)^ */}
             <NewsItem news={el} />
           </Link>
         ))}

@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import {
   loadLikedPosts,
   removeLikedPost,
@@ -23,14 +24,19 @@ const LikedPosts = () => {
         <div className="news_full liked_news news_item" key={el.title}>
           <NewsItem news={el} />
           <p>{el.description}</p>
-          <button
-            className="black_btn"
-            onClick={(event) => {
-              clickHandler(el);
-            }}
-          >
-            remove item
-          </button>
+          <div className="buttons_flex">
+            <Link to={`/news/` + el.title}>
+              <button className="black_btn">Open</button>
+            </Link>
+            <button
+              className="black_btn"
+              onClick={(event) => {
+                clickHandler(el);
+              }}
+            >
+              Remove
+            </button>
+          </div>
         </div>
       ))}
     </div>

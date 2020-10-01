@@ -1,14 +1,19 @@
-import React, { useState } from "react";
-import { connect } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { searchNews } from "../../store/actions/newsActions";
 
-const NewsSearch = ({ searchNews }) => {
+const NewsSearch = () => {
+  const dispatch = useDispatch();
+  const startsearch = useSelector((state) => state.news.search);
   const [searchVal, setSearchVal] = useState("");
   const changeHandler = (event) => setSearchVal(event.target.value);
   const submitHandler = (event) => {
     event.preventDefault();
-    searchNews(searchVal);
+    dispatch(searchNews(searchVal));
   };
+  useEffect(() => {
+    setSearchVal(startsearch);
+  }, []);
   return (
     <>
       <form className="news_search" onSubmit={submitHandler}>
@@ -25,7 +30,5 @@ const NewsSearch = ({ searchNews }) => {
     </>
   );
 };
-const mapDispatchToProps = (dispatch) => ({
-  searchNews: (word) => dispatch(searchNews(word)),
-});
-export default connect(null, mapDispatchToProps)(NewsSearch);
+
+export default NewsSearch;
