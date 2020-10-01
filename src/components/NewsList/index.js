@@ -21,8 +21,8 @@ const NewsList = () => {
   return news ? (
     <>
       <div className="news_list">
-        {news.map((el, index) => (
-          <Link to={`/news/` + index} key={v4()} className="news_item">
+        {news.map((el) => (
+          <Link to={`/news/` + el.title} key={v4()} className="news_item">
             <NewsItem news={el} />
           </Link>
         ))}

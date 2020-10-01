@@ -4,6 +4,7 @@ import {
   CHANGE_SORT,
   CHANGE_SOURCE,
   LOAD,
+  GET_SINGLE_NEWS,
 } from "../constans";
 
 const initState = {
@@ -25,6 +26,12 @@ const newsReducer = (state = initState, action) => {
       return {
         ...state,
         search: action.search,
+      };
+    case GET_SINGLE_NEWS:
+      return {
+        ...state,
+        singleNews: action.singleNews,
+        loading: false,
       };
     case CHANGE_SORT:
       return {

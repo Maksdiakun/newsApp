@@ -4,7 +4,7 @@ import { getComments } from "../../fetch";
 import Comments from "../Comments";
 import AddComment from "../AddComment";
 import Spiner from "../Spiner";
-import { getNews } from "../../store/actions/newsActions";
+import { getSingleNews } from "../../store/actions/newsActions";
 import {
   addLikedPost,
   removeLikedPost,
@@ -18,19 +18,20 @@ const NewsFullItem = ({ match: { params } }) => {
 
   const liked = useSelector((state) => state.liked.posts);
   const { user } = useSelector((state) => state.user);
-  const { sortBy, search, news, loading, sources } = useSelector((state) => {
-    return state.news;
-  });
-
+  const { loading, singleNews, sortBy, search, sources } = useSelector(
+    (state) => {
+      return state.news;
+    }
+  );
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getNews(sortBy, search, sources));
     dispatch(loadLikedPosts());
+    dispatch(getSingleNews(params.id, sortBy, search, sources));
   }, []);
 
   useEffect(() => {
-    if (news.length) {
-      let str = news[params.id].title.slice(0, 22).replace(/\s/g, "");
+    if (singleNews) {
+      let str = singleNews.title.slice(0, 22).replace(/\s/g, "");
       str = str + params.id;
       setCommentId(str);
       getComments(str).then((res) => {
@@ -38,18 +39,18 @@ const NewsFullItem = ({ match: { params } }) => {
           setComments(Object.values(res));
         }
       });
-      if (liked && news[params.id].title in liked) {
-        setLike(true);
-      }
     }
-  }, [news]);
+    if (liked && singleNews && singleNews.title in liked) {
+      setLike(true);
+    }
+  }, [liked, singleNews]);
 
   const changeHandler = () => {
     setLike((prevState) => !prevState);
     if (!like) {
-      dispatch(addLikedPost(news[params.id]));
+      dispatch(addLikedPost(singleNews));
     } else {
-      dispatch(removeLikedPost(news[params.id].title));
+      dispatch(removeLikedPost(singleNews.title));
     }
   };
   const changeStCallback = useCallback(
@@ -58,12 +59,12 @@ const NewsFullItem = ({ match: { params } }) => {
     },
     [comments]
   );
-  if (loading || !news[params.id]) {
+  if (loading || !singleNews) {
     return <Spiner />;
   }
-  let { author, title, description, url, urlToImage } = news[params.id];
+  let { author, title, description, url, urlToImage } = singleNews;
   return (
-    news[params.id] && (
+    singleNews && (
       <div>
         <div className="news_full">
           <div className="news_full_img">

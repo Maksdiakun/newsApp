@@ -1,9 +1,10 @@
 import React from "react";
+import moment from "moment";
 import "./newsItem.scss";
 const NewsItem = ({
   news: { author, urlToImage, title, publishedAt: date },
 }) => {
-  date = date.slice(0, 10);
+  const time = moment(date, "YYYY-MM-DD").fromNow();
   const defaultImg = "https://erasmusplus.org.ge/files/news/news-1.jpg";
   return (
     <>
@@ -14,7 +15,7 @@ const NewsItem = ({
         <p className="news_item_title">{title}</p>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <p className="news_item_author">{author}</p>
-          <p> {date}</p>
+          <p> {time}</p>
         </div>
       </div>
     </>
