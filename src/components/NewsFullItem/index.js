@@ -1,58 +1,56 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getComments } from "../fetch";
-import Comments from "./Comments";
-import AddComment from "./AddComment";
-import {getNews} from "../store/actions/newsActions";
-import Spiner from "./spiner";
+import { getComments } from "../../fetch";
+import Comments from "../Comments";
+import AddComment from "../AddComment";
+import Spiner from "../Spiner";
+import { getNews } from "../../store/actions/newsActions";
+import {
+  addLikedPost,
+  removeLikedPost,
+  loadLikedPosts,
+} from "../../store/actions/likeActions";
 
 const NewsFullItem = ({ match: { params } }) => {
   const [like, setLike] = useState(false);
   const [comentId, setCommentId] = useState("");
   const [comments, setComments] = useState(null);
 
-  const {sortBy,search,news,loading} = useSelector((state) => {
-      return  state.news
+  const liked = useSelector((state) => state.liked.posts);
+  const { user } = useSelector((state) => state.user);
+  const { sortBy, search, news, loading, sources } = useSelector((state) => {
+    return state.news;
   });
-  const user = useSelector(state=> state.user);
 
-  const dispatch=  useDispatch();
-    useEffect(() => {
-      dispatch(getNews(sortBy, search))
-          let liked = localStorage.getItem("liked");
-              liked = JSON.parse(liked);
-              if (news && liked && news.url in liked) {
-                setLike(true);
-              }
-    }, []);
-    useEffect(()=>{
-      if(news.length){
-        let str = news[params.id].title.slice(0, 22).replace(/\s/g, "");
-        str = str + params.id;
-        setCommentId(str);
-        getComments(str).then((res) => {
-          if (res) {
-            setComments(Object.values(res));
-          }
-        });
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getNews(sortBy, search, sources));
+    dispatch(loadLikedPosts());
+  }, []);
+
+  useEffect(() => {
+    if (news.length) {
+      let str = news[params.id].title.slice(0, 22).replace(/\s/g, "");
+      str = str + params.id;
+      setCommentId(str);
+      getComments(str).then((res) => {
+        if (res) {
+          setComments(Object.values(res));
+        }
+      });
+      if (liked && news[params.id].title in liked) {
+        setLike(true);
       }
-    },[news])
-
+    }
+  }, [news]);
 
   const changeHandler = () => {
     setLike((prevState) => !prevState);
-    let liked = localStorage.getItem("liked");
-    liked = JSON.parse(liked);
-    localStorage.removeItem("liked");
     if (!like) {
-      liked = {
-        ...liked,
-        [news.url]: news,
-      };
+      dispatch(addLikedPost(news[params.id]));
     } else {
-      delete liked[news.url];
+      dispatch(removeLikedPost(news[params.id].title));
     }
-    localStorage.setItem("liked", JSON.stringify(liked));
   };
   const changeStCallback = useCallback(
     (comment) => {
@@ -60,13 +58,10 @@ const NewsFullItem = ({ match: { params } }) => {
     },
     [comments]
   );
-  if (loading){
-    return <Spiner/>
+  if (loading || !news[params.id]) {
+    return <Spiner />;
   }
-  if (!news[params.id]){
-    return <></>
-  }
-    let { author, title, description, url, urlToImage } = news[params.id];
+  let { author, title, description, url, urlToImage } = news[params.id];
   return (
     news[params.id] && (
       <div>

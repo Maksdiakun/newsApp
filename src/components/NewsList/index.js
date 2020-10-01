@@ -3,29 +3,29 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { v4 } from "uuid";
 import NewsItem from "../NewsItem";
-import Spiner from '../spiner'
+import Spiner from "../Spiner";
 import { getNews } from "../../store/actions/newsActions";
 import "./news.scss";
 
 const NewsList = () => {
   const dispatch = useDispatch();
-  const {sortBy,search,news,loading} = useSelector((state) => {
-    return  state.news
-});
+  const { sortBy, search, news, loading, sources } = useSelector((state) => {
+    return state.news;
+  });
   useEffect(() => {
-    dispatch(getNews(sortBy, search));
-  }, [search, sortBy]);
-   if (loading){
-     return <Spiner/>
-   }
+    dispatch(getNews(sortBy, search, sources));
+  }, [search, sortBy, sources]);
+  if (loading) {
+    return <Spiner />;
+  }
   return news ? (
     <>
       <div className="news_list">
-        { news.map((el, index) => (
+        {news.map((el, index) => (
           <Link to={`/news/` + index} key={v4()} className="news_item">
             <NewsItem news={el} />
           </Link>
-        )) }
+        ))}
       </div>
     </>
   ) : (

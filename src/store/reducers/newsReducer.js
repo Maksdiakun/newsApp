@@ -1,37 +1,48 @@
-import { GET_NEWS, SEARCH_NEWS, CHANGE_SORT ,LOAD} from "../constans";
+import {
+  GET_NEWS,
+  SEARCH_NEWS,
+  CHANGE_SORT,
+  CHANGE_SOURCE,
+  LOAD,
+} from "../constans";
 
-const initState= {
-  news : [],
-  sortBy:'publishedAt',
-  search : 'all',
-  loading : false
-}
+const initState = {
+  news: [],
+  sortBy: "publishedAt",
+  search: "all",
+  loading: false,
+  sources: null,
+};
 const newsReducer = (state = initState, action) => {
   switch (action.type) {
     case GET_NEWS:
       return {
         ...state,
-          news : action.payload,
-          loading: false
-      } 
-      case SEARCH_NEWS:
-        return {
-          ...state,
-          search: action.search,
-        };
-        case CHANGE_SORT: 
-        return {
-          ...state,
-          sortBy: action.sortBy,
-        };
-        case LOAD:
-          return  {
-            ...state,
-           loading :  action.loading
-          }
+        news: action.payload,
+        loading: false,
+      };
+    case SEARCH_NEWS:
+      return {
+        ...state,
+        search: action.search,
+      };
+    case CHANGE_SORT:
+      return {
+        ...state,
+        sortBy: action.sortBy,
+      };
+    case CHANGE_SOURCE:
+      return {
+        ...state,
+        sources: action.sources,
+      };
+    case LOAD:
+      return {
+        ...state,
+        loading: action.loading,
+      };
     default:
-      return initState;
+      return state;
   }
 };
 export default newsReducer;
-

@@ -1,0 +1,10 @@
+.multi_select{
+    display: flex;
+    align-items: center;
+    span{
+        margin-right: 15px;
+    }
+}
+.optionContainer >li:hover {
+    background-color: #333;
+}

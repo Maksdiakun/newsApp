@@ -1,0 +1,26 @@
+
+.news_header{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    padding: 0 15px;
+    width: 100%;
+    &_sort{
+        display: flex;
+        align-items: center;
+        p{
+            margin-right: 10px;
+        }
+    }
+}
+.news_search{
+    display: flex;
+    align-items: flex-end;
+    input{
+        border: none;
+        border-bottom: 1px solid #333;
+        margin-right: 10px;
+        padding: 5px;
+    }
+}

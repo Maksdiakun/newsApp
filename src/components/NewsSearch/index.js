@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { searchNews } from "../store/actions/newsActions";
+import { searchNews } from "../../store/actions/newsActions";
 
 const NewsSearch = ({ searchNews }) => {
   const [searchVal, setSearchVal] = useState("");
