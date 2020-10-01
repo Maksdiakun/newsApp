@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { postComment } from "../../fetch";
+import { useDispatch } from "react-redux";
+import { addComments } from "../../store/actions/commentActions";
 
-const AddComment = ({ user, news, changeSt, comentId }) => {
+const AddComment = ({ user, postId }) => {
   const [comment, setComment] = useState("");
+  const dispatch = useDispatch();
   const changeHandler = (event) => {
     const value = event.target.value;
     setComment(value);
@@ -28,13 +30,11 @@ const AddComment = ({ user, news, changeSt, comentId }) => {
       date: datetime,
       author: user.displayName,
     };
-    postComment(comentId, obj).then(() => {
-      changeSt(obj);
-      setComment("");
-    });
+    dispatch(addComments(obj, postId));
+    setComment("");
   };
   return (
-    <div>
+    <div className="add_comment">
       <form action="" onSubmit={submitHandler} className="coment_form">
         <textarea
           name="comment"
