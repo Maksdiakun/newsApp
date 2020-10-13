@@ -18,7 +18,7 @@ export const getData = async (
 export const getCategoryPosT = async (category) => {
   try {
     const response = await axios(
-      `https://newsapi.org/v2/top-headlines?language=en&category=${
+      `https://newsapi.org/v2/top-headlines?language=en&country=us&category=${
         category ? category : "general"
       }&apiKey=c3411292270a4096af555e137d70063b`
     );

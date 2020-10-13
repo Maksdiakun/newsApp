@@ -1,33 +1,41 @@
 import React from "react";
+import { Container, Navbar } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
-import { auth } from "firebase";
-import userAction from "../../store/actions/userAction";
+import { Link, NavLink } from "react-router-dom";
+import { signOutAction } from "../../store/actions/userAction";
+
 import "./header.scss";
 
 const Header = () => {
   const user = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
   const logOutHandler = () => {
-    auth().signOut();
-    dispatch(userAction(null));
+    dispatch(signOutAction());
   };
   return (
     <header>
-      {user && (
-        <a href="#" onClick={logOutHandler}>
-          LogOut
-        </a>
-      )}
-      <NavLink to="/liked">Liked Posts</NavLink>
-      <NavLink exact to="/">
-        Home page
-      </NavLink>
-      {user ? (
-        <NavLink to="/account">My Profile</NavLink>
-      ) : (
-        <NavLink to="/login">Authorization</NavLink>
-      )}
+      <Container className="d-flex justify-content-between align-items-center">
+        {user && (
+          <a href="#" onClick={logOutHandler} className="link_st">
+            LogOut
+          </a>
+        )}
+        <NavLink className="link_st" to="/liked">
+          Liked Posts
+        </NavLink>
+        <NavLink exact to="/" className="link_st">
+          Home page
+        </NavLink>
+        {user ? (
+          <NavLink to="/account" className="link_st">
+            My Profile
+          </NavLink>
+        ) : (
+          <NavLink to="/login" className="link_st">
+            Authorization
+          </NavLink>
+        )}
+      </Container>
     </header>
   );
 };

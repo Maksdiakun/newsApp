@@ -21,6 +21,27 @@ code {
   width: 100vw;
 }
 a{
-  text-decoration: none;
-  color: #333;
+  text-decoration: none !important;
+  color: #333 !important;
 }
+
+.link_st{
+  color: #fff !important;
+  text-decoration: none !important;
+  position: relative;
+  padding-bottom: 1px;
+}
+  .link_st:after{
+      content: '';
+      width: 0%;
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translate(-50%,0);
+      height: 1px;
+      background-color:#fff;
+      transition: all 0.3s; 
+  }
+  .link_st:hover:after{
+         width: 100%;
+  }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { searchNews } from "../../store/actions/newsActions";
-
+import "./news_search.scss";
 const NewsSearch = () => {
   const dispatch = useDispatch();
   const startsearch = useSelector((state) => state.news.search);
@@ -23,8 +23,11 @@ const NewsSearch = () => {
           onChange={changeHandler}
           required
         />
-        <button type="submit" className="black_btn">
-          Search
+        <button type="submit">
+          <img
+            src="https://img.icons8.com/pastel-glyph/2x/search--v2.png"
+            alt=""
+          />
         </button>
       </form>
     </>

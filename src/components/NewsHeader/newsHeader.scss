@@ -3,6 +3,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    align-items: flex-end;
     margin-bottom: 30px;
     padding: 0 15px;
     width: 100%;
@@ -13,14 +14,7 @@
             margin-right: 10px;
         }
     }
-}
-.news_search{
-    display: flex;
-    align-items: flex-end;
-    input{
-        border: none;
-        border-bottom: 1px solid #333;
-        margin-right: 10px;
-        padding: 5px;
+    >*{
+        margin-bottom: 20px;
     }
 }

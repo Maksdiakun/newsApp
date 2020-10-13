@@ -44,7 +44,7 @@ const NewsFullItem = ({ match: { params } }) => {
   let { author, title, description, url, urlToImage } = singleNews;
   return (
     singleNews && (
-      <div>
+      <div className="container">
         <div className="news_full">
           <div className="news_full_img">
             <img src={urlToImage} alt="" />

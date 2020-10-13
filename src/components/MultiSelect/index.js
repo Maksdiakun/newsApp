@@ -31,7 +31,15 @@ const MultiSelect = () => {
         onRemove={onChange}
         placeholder="choose sources"
         selectedValues={selected}
-        style={{ chips: { background: "#333" } }}
+        // style={{ chips: { background: "#333" } }}
+        style={{
+          chips: { background: "#333" },
+          searchBox: {
+            border: "none",
+            "border-bottom": "1px solid #333",
+            "border-radius": "0px",
+          },
+        }}
       />
     </div>
   );
