@@ -4,16 +4,17 @@ import SideBar from "../../SideBar";
 import NewsList from "../../NewsList";
 import NewsHeader from "../../NewsHeader";
 import "./HomePage.scss";
+import { Container } from "react-bootstrap";
 
 const HomePage = ({ user }) => {
   return (
-    <div style={{ display: "flex" }}>
+    <main>
       {user && <SideBar user={user} />}
-      <main>
+      <Container>
         <NewsHeader />
         <NewsList />
-      </main>
-    </div>
+      </Container>
+    </main>
   );
 };
 const mapStateToProps = (state) => ({

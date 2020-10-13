@@ -11,7 +11,7 @@ const NewsItem = ({
       <div className="news_item_img">
         <img src={urlToImage ? urlToImage : defaultImg} alt="" />
       </div>
-      <div>
+      <div className="news_item_text">
         <p className="news_item_title">{title}</p>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <p className="news_item_author">{author}</p>

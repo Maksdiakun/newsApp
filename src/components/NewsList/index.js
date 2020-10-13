@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { v4 } from "uuid";
+import { Row, Col } from "react-bootstrap";
 import NewsItem from "../NewsItem";
 import Spiner from "../Spiner";
 import { getNews } from "../../store/actions/newsActions";
@@ -20,14 +21,18 @@ const NewsList = () => {
   }
   return news && news.length > 0 ? (
     <>
-      <div className="news_list">
+      <Row className="news_list justify-content-center">
         {news.map((el) => (
-          <Link to={`/news/${el.title}`} key={v4()} className="news_item">
-            {/* encodeURIComponent(el.title)^ */}
-            <NewsItem news={el} />
-          </Link>
+          <Col xs={12} md={6} lg={4} xl={3} key={v4()}>
+            <Link
+              to={`/news/${encodeURIComponent(el.title)}`}
+              className="news_item news_list_item"
+            >
+              <NewsItem news={el} />
+            </Link>
+          </Col>
         ))}
-      </div>
+      </Row>
     </>
   ) : (
     <div>no News</div>
