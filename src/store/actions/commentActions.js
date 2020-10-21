@@ -17,6 +17,12 @@ export const loadComments = (postId) => (dispatch) => {
 
 export const addComments = (coment, postId) => {
   var newPostKey = firebase.database().ref(`/comments/${postId}/`).push().key;
-  firebase.database().ref(`/comments/${postId}/${newPostKey}`).update(coment);
+  firebase
+    .database()
+    .ref(`/comments/${postId}/${newPostKey}`)
+    .update(coment)
+    .catch((err) => {
+      console.log(err.message);
+    });
   return { type: ADD_COMMENTS, payload: coment };
 };

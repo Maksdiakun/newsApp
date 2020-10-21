@@ -25,7 +25,8 @@ const NewsList = () => {
         {news.map((el) => (
           <Col xs={12} md={6} lg={4} xl={3} key={v4()}>
             <Link
-              to={`/news/${encodeURIComponent(el.title)}`}
+              // encodeURIComponent
+              to={`/news/${el.title}`}
               className="news_item news_list_item"
             >
               <NewsItem news={el} />
