@@ -37,8 +37,8 @@ const NewsSort = () => {
         style={{
           searchBox: {
             border: "none",
-            "border-bottom": "1px solid #333",
-            "border-radius": "0px",
+            borderBottom: "1px solid #333",
+            borderRadius: "0px",
           },
         }}
       />
